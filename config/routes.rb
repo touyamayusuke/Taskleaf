@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   
   root to: 'tasks#index'
   resources :tasks
+  post '/tasks/new/confirm', to: 'tasks#confirm_new', as: :confirm_new_task
 end
