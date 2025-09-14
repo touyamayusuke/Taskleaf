@@ -51,7 +51,10 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: "タスク「#{@task.name}」を削除しました。"
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@task) }
+      format.html { redirect_to tasks_url, notice: "タスクを削除しました。", status: :see_other }
+    end
   end
 
   def import
